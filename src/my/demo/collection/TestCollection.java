@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Random;
 
 import static my.demo.collection.CollestionUtils.randomCreateString;
 
@@ -18,33 +19,36 @@ import static my.demo.collection.CollestionUtils.randomCreateString;
 public class TestCollection {
     public static void main(String[] args) {
 
-        List<Integer> list;
-        list = new ArrayList<>();
-        testInsertBefore(list, "ArrayList");
+        Random random = new Random();
+        Node<Integer> node = new Node<>();
+        for (int i = 0; i < 5; i++) {
+            node.add(random.nextInt(100));
+        }
+        System.out.println(node);
 
-        list = new LinkedList<>();
-        testInsertBefore(list, "LinkedList");
 
-        list = new ArrayList<>();
-        testInsertMid(list, "ArrayList");
-
-        list = new LinkedList<>();
-        testInsertMid(list, "LinkedList");
-
-        list = new ArrayList<>();
-        testInsertAfter(list, "ArrayList");
-
-        list = new LinkedList<>();
-        testInsertAfter(list, "LinkedList");
     }
 
-    public static void testInsertMid(List<Integer> list, String type){
-        int total = 1000*100;
+    public static void testLinkedHashSet() {
+        LinkedHashSet<Character> objects = new LinkedHashSet<>();
+        char[] array = String.valueOf(Math.PI).toCharArray();
+        for (int i = 0; i < array.length; i++) {
+            if (i == 1) {
+                continue;
+            }
+            objects.add(array[i]);
+        }
+        System.out.println(array);
+        System.out.println(objects);
+    }
+
+    public static void testInsertMid(List<Integer> list, String type) {
+        int total = 1000 * 100;
         int num = 5;
 
         long start = System.currentTimeMillis();
-        for(int i=0;i<total;i++){
-            list.add(i/2, num);
+        for (int i = 0; i < total; i++) {
+            list.add(i / 2, num);
         }
         long end = System.currentTimeMillis();
         System.out.printf("在%s中间插入%d条数据，总计耗时：%d",type, total, end-start);

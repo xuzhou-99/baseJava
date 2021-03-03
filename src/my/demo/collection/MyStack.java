@@ -8,22 +8,22 @@ import java.util.LinkedList;
  * @title MyStack
  * @date 2021/3/1 18:10
  */
-public class MyStack implements Stack {
+public class MyStack<T> {
 
-    static LinkedList<Hero> heroLinkedList = new LinkedList<>();
+    LinkedList<T> values = new LinkedList<>();
 
-    @Override
-    public void push(Hero hero) {
-        heroLinkedList.add(hero);
+
+    public void push(T t) {
+        values.add(t);
     }
 
-    @Override
-    public Hero pull() {
-        return heroLinkedList.getLast();
+
+    public T pull() {
+        return values.removeLast();
     }
 
-    @Override
-    public Hero peek() {
-        return heroLinkedList.removeLast();
+
+    public T peek() {
+        return values.getLast();
     }
 }

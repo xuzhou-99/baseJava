@@ -26,21 +26,33 @@ public class Hero implements Serializable {
      */
     public int damage;
 
-    public Hero(){
+    public Hero() {
 
     }
-    public Hero(String name){
+
+    public Hero(String name, float hp, int damage) {
+        this.name = name;
+        this.hp = hp;
+        this.damage = damage;
+    }
+
+    public Hero(String name) {
         this.name = name;
     }
-    public String getName(){
+
+    public String getName() {
         return this.name;
     }
 
     /**
-     *  重写toString方法
+     * 重写toString方法
      */
     @Override
-    public String toString(){
-        return name;
+    public String toString() {
+        return "Hero{" +
+                "name='" + name + '\'' +
+                ", hp=" + hp +
+                ", damage=" + damage +
+                '}' + "\r\n";
     }
 }
