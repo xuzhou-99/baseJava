@@ -35,7 +35,7 @@ public class Node<T> {
             // 将值赋予当前节点
             value = v;
         } else {
-            if ((int) v < (int) value) {
+            if ((Integer) v < (Integer) value) {
                 // 要添加节点的值 < 当前节点
                 if (null == leftNode) {
                     // 当前节点无左子节点
@@ -43,9 +43,9 @@ public class Node<T> {
                 }
                 // 当前节点有左子节点
                 leftNode.add(v);
-            }else {
+            } else {
                 // 值 >= 当前节点值
-                if(null == rightNode){
+                if (null == rightNode) {
                     // 当前节点无右子节点
                     rightNode = new Node();
                 }

@@ -55,4 +55,19 @@ public class Hero implements Serializable {
                 ", damage=" + damage +
                 '}' + "\r\n";
     }
+
+    /**
+     * 比较
+     *
+     * @param anotherHero 比较对象
+     * @return int
+     */
+    public int compareTo(Hero anotherHero) {
+        if (damage < anotherHero.damage) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
 }
