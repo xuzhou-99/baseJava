@@ -1,8 +1,10 @@
 package my.demo.file;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -147,10 +149,66 @@ public class FileUtils {
 
             int byteRead;
             byte[] buffer = new byte[1024];
-            while ((byteRead = fis.read(buffer)) > 0){
+            while ((byteRead = fis.read(buffer)) > 0) {
                 fos.write(buffer, 0, byteRead);
             }
-        }catch (IOException e){
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 多线程查询文件中包含字符串
+     *
+     * @param file   文件
+     * @param string 字符串
+     * @param suffix 指定后缀名
+     */
+    public static void searchFileMultithreading(File file, String string, String suffix) {
+        if (file.isFile()) {
+            // 文件
+            if (null != suffix && !"".equals(suffix)) {
+                // 如果指定后缀名
+                if (file.getName().endsWith(suffix)) {
+                    searchFileContent(file, string);
+                }
+            } else {
+                searchFileContent(file, string);
+            }
+        }
+
+        if (file.isDirectory()) {
+            // 文件夹
+            File[] files = file.listFiles();
+            if (null != files) {
+                for (File f : files) {
+                    Thread thread = new Thread(() -> searchFileMultithreading(f, string, suffix));
+                    thread.start();
+                }
+            }
+        }
+    }
+
+    /**
+     * 查询文件内容中是否包含字段
+     *
+     * @param file   文件
+     * @param string 字符串
+     */
+    public static void searchFileContent(File file, String string) {
+        try (FileReader fileReader = new FileReader(file);
+             BufferedReader bufferedReader = new BufferedReader(
+                     fileReader
+             )) {
+            char[] chars = new char[(int) file.length()];
+            int count = bufferedReader.read(chars);
+            if (count > 0) {
+                String s = new String(chars);
+                if (s.contains(string)) {
+                    System.out.println(file.getAbsolutePath());
+                }
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

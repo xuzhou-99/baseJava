@@ -8,6 +8,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 
+import my.demo.entity.Hero;
+
 import static my.demo.collection.CollestionUtils.randomCreateString;
 
 /**

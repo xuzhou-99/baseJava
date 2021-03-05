@@ -23,11 +23,11 @@ public class FilePractice {
 //
 //        localFile3();
         File f = new File("c:/windows");
-
-        localFileRecursive(f);
-
-        System.out.println("The max file is: " + maxFile + ", size is: " + maxFile.length() + " byte"  );
-        System.out.println("The min file is: " + minFile + ", size is: " + minFile.length() + " byte"  );
+        FileUtils.searchFileMultithreading(f, "123", ".txt");
+//        localFileRecursive(f);
+//
+//        System.out.println("The max file is: " + maxFile + ", size is: " + maxFile.length() + " byte"  );
+//        System.out.println("The min file is: " + minFile + ", size is: " + minFile.length() + " byte"  );
 
     }
 

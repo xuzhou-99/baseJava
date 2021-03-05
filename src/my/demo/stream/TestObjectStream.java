@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import my.demo.collection.Hero;
+import my.demo.entity.Hero;
 
 /**
  * @author xuzhou

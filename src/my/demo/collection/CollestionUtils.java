@@ -3,7 +3,10 @@ package my.demo.collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
+
+import my.demo.entity.Hero;
 
 /**
  * @author xuzhou
@@ -12,8 +15,8 @@ import java.util.Set;
  * @date 2021/3/1 17:25
  */
 public class CollestionUtils {
-    public static int contents(List list, Hero hero){
-        for(int i=0; i<list.size();i++){
+    public static int contents(List list, Hero hero) {
+        for (int i = 0; i < list.size(); i++) {
             if((((Hero)list.get(i)).name).equals(hero.name)){
                 return i;
             }
@@ -45,8 +48,8 @@ public class CollestionUtils {
     public static void selectSort(int[] a){
         int temp = 0;
         for(int i=0;i<a.length-1;i++){
-            for(int j =i+1;j<a.length;j++){
-                if(a[i]> a[j]){
+            for (int j = i + 1; j < a.length; j++) {
+                if (a[i] > a[j]) {
                     temp = a[i];
                     a[i] = a[j];
                     a[j] = temp;
@@ -55,23 +58,57 @@ public class CollestionUtils {
         }
     }
 
-    public static String randomCreateString(int num){
+    /**
+     * 获取一定长度的随机字符串
+     *
+     * @param num 字符串长度
+     * @return String
+     */
+    public static String randomCreateString(int num) {
+        Random random = new Random();
         char[] chars = new char[num];
         String letterOrDigital = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-        for(int i = 0; i < num; i++){
-            chars[i] = letterOrDigital.charAt((int)(Math.random() * letterOrDigital.length()));
+        for (int i = 0; i < num; i++) {
+            chars[i] = letterOrDigital.charAt(random.nextInt(letterOrDigital.length()));
         }
         return new String(chars);
     }
 
     /**
+     * 获取一定长度的随机字符串
+     *
+     * @param length 字符串长度
+     * @return String
+     */
+    public static String randomString(int length) {
+        Random random = new Random();
+        StringBuilder pool = new StringBuilder();
+        for (short i = '0'; i <= '9'; i++) {
+            pool.append((char) i);
+        }
+        for (short i = 'a'; i <= 'z'; i++) {
+            pool.append((char) i);
+        }
+        for (short i = 'A'; i <= 'Z'; i++) {
+            pool.append((char) i);
+        }
+        char[] cs = new char[length];
+        for (int i = 0; i < cs.length; i++) {
+            int index = random.nextInt(pool.length());
+            cs[i] = pool.charAt(index);
+        }
+        return new String(cs);
+    }
+
+    /**
      * 0-9999之间的随机数，要求不能有重复的
+     *
      * @param num 生成的个数
      * @return Set<Integer>
      */
-    public static Set randomCreateDiffInt(int num){
-        if (num ==0){
+    public static Set randomCreateDiffInt(int num) {
+        if (num == 0) {
             return Collections.EMPTY_SET;
         }
 

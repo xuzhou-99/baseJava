@@ -3,6 +3,8 @@ package my.demo.collection;
 import java.util.ArrayList;
 import java.util.List;
 
+import my.demo.entity.Hero;
+
 /**
  * @author xuzhou
  * @version 1.0.0

@@ -3,9 +3,10 @@ package my.demo.lambda;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
-import my.demo.collection.Hero;
+import my.demo.entity.Hero;
 
 /**
  * @author xuzhou
@@ -30,26 +31,33 @@ public class TestLambda {
         list.add(hero1);
 
         System.out.println("初始化集合数据：");
-        list.stream().forEach(hero -> System.out.print(hero));
+        list.stream()
+                .forEach(System.out::print);
 
         System.out.println("满足hp>100 && damage<50的英雄");
-        list.stream().filter(h -> h.hp > 100 && h.damage < 50).forEach(hero -> System.out.print(hero));
+        list.stream()
+                .filter(h -> h.hp > 100 && h.damage < 50)
+                .forEach(System.out::print);
 
         System.out.println("去除重复的数据：");
-        list.stream().distinct().forEach(hero -> System.out.print(hero));
+        list.stream()
+                .distinct()
+                .forEach(System.out::print);
 
         System.out.println("按照血量排序：");
-        list.stream().sorted((h1, h2) -> h1.hp > h2.hp ? 1 : -1).forEach(hero -> System.out.print(hero));
+        list.stream()
+                .sorted((h1, h2) -> h1.hp > h2.hp ? 1 : -1)
+                .forEach(System.out::print);
 
         System.out.println("保留前3个：");
         list.stream()
                 .limit(3)
-                .forEach(hero -> System.out.print(hero));
+                .forEach(System.out::print);
 
         System.out.println("忽略前3个：");
         list.stream()
                 .skip(3)
-                .forEach(hero -> System.out.print(hero));
+                .forEach(System.out::print);
 
         System.out.println("返回一个数组：");
         Object[] array = list.stream()
@@ -57,14 +65,16 @@ public class TestLambda {
         System.out.println(Arrays.toString(array));
 
         System.out.println("返回伤害最小的：");
-        Hero hero = list.stream()
-                .min((h1, h2) -> h1.damage > h2.damage ? 1 : -1).get();
-        System.out.println(hero);
+        Optional<Hero> hero = list.stream()
+                .min((h1, h2) -> h1.damage > h2.damage ? 1 : -1);
+
+        hero.ifPresent(System.out::println);
 
         System.out.println("返回伤害最大的：");
-        Hero hero2 = list.stream()
-                .max((h1, h2) -> h1.damage > h2.damage ? 1 : -1).get();
-        System.out.println(hero2);
+        Optional<Hero> hero2 = list.stream()
+                .max((h1, h2) -> h1.damage > h2.damage ? 1 : -1);
+        hero2.ifPresent(System.out::println);
+
 
         System.out.println("返回数据总数：");
         long count = list.stream()
@@ -72,18 +82,17 @@ public class TestLambda {
         System.out.println(count);
 
         System.out.println("返回第一个元素：");
-        Hero hero3 = list.stream()
-                .findFirst()
-                .get();
-        System.out.println(hero3);
+        Optional<Hero> hero3 = list.stream()
+                .findFirst();
+
+        hero3.ifPresent(System.out::println);
 
         System.out.println("排名第三高的：");
-        Hero hero4 = list.stream()
-                .sorted((h1, h2) -> h1.hp < h2.hp ? 1 : -1)
+        Optional<Hero> hero4 = list.stream()
+                .sorted((h1, h2) -> (h1.hp < h2.hp ? 1 : -1))
                 .skip(2)
-                .findFirst()
-                .get();
-        System.out.println(hero4);
+                .findFirst();
+        hero4.ifPresent(System.out::println);
 
     }
 

@@ -1,6 +1,6 @@
 package my.demo.lambda;
 
-import my.demo.collection.Hero;
+import my.demo.entity.Hero;
 
 /**
  * @author xuzhou

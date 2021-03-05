@@ -1,5 +1,7 @@
 package my.demo.collection;
 
+import my.demo.entity.Hero;
+
 /**
  * @author xuzhou
  * @version 1.0.0
