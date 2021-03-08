@@ -121,17 +121,44 @@ public class Hero implements Serializable {
     }
 
     /**
-     * 回血
+     * recover hp
+     * add modifier synchronized before the method
+     * effect: the synchronization object is this
      */
-    public void recover() {
+    public synchronized void recover() {
+        if (this.hp == 1000) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         hp = hp + 1;
+        System.out.printf("%s 加血1点,增加血后，%s的血量是%.0f%n", name, name, hp);
+
+        // notify those threads waiting on this object to wake up
+        this.notify();
     }
 
     /**
      * 受伤
+     * use this object as synchronization object
      */
-    public void hurt() {
+    public synchronized void hurt() {
+        if (hp == 1) {
+            try {
+                // release the possession of this
+                // waiting for wake
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
         hp = hp - 1;
+        System.out.printf("%s 减血1点,减少血后，%s的血量是%.0f%n", name, name, hp);
+
+        this.notify();
     }
 
     /**
