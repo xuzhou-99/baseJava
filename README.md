@@ -1,2 +1,2 @@
 # baseJava
-the base of java learning
+java basic learning
