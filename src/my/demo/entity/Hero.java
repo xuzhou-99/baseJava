@@ -26,6 +26,12 @@ public class Hero implements Serializable {
      */
     public int damage;
 
+    static String copyright;
+    static {
+        System.out.println("初始化 copyright");
+        copyright = "The Light own the right";
+    }
+
     public Hero() {
 
     }
