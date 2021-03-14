@@ -1,20 +1,16 @@
 package my.demo.collection;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 import my.demo.entity.Hero;
+
+import java.util.*;
 
 /**
  * @author xuzhou
  * @version 1.0.0
- * @title CollestionUtils
+ * @title CollectionUtils
  * @date 2021/3/1 17:25
  */
-public class CollestionUtils {
+public class CollectionUtils {
     public static int contents(List list, Hero hero) {
         for (int i = 0; i < list.size(); i++) {
             if((((Hero)list.get(i)).name).equals(hero.name)){

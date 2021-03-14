@@ -1,16 +1,10 @@
 package my.demo.collection;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Random;
-
 import my.demo.entity.Hero;
 
-import static my.demo.collection.CollestionUtils.randomCreateString;
+import java.util.*;
+
+import static my.demo.collection.CollectionUtils.randomCreateString;
 
 /**
  * @author xuzhou
@@ -191,7 +185,7 @@ public class TestCollection {
             a[i] = (int) (Math.random()*10000);
         }
         long start = System.currentTimeMillis();
-        CollestionUtils.bubbleSort(a);
+        CollectionUtils.bubbleSort(a);
         long end = System.currentTimeMillis();
         System.out.println("冒泡排序时长："+(end-start));
     }
@@ -201,7 +195,7 @@ public class TestCollection {
             a[i] = (int) (Math.random()*10000);
         }
         long start = System.currentTimeMillis();
-        CollestionUtils.selectSort(a);
+        CollectionUtils.selectSort(a);
         long end = System.currentTimeMillis();
         System.out.println("选择排序时长："+(end-start));
     }
