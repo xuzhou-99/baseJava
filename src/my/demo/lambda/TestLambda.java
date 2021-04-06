@@ -3,9 +3,15 @@ package my.demo.lambda;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
+import com.sun.xml.internal.ws.util.StringUtils;
+
+import my.demo.entity.CodeType;
 import my.demo.entity.Hero;
 
 /**
@@ -16,6 +22,29 @@ import my.demo.entity.Hero;
  */
 public class TestLambda {
     public static void main(String[] args) {
+
+        lambda();
+
+    }
+
+    public static void filterHero(List<Hero> list) {
+        for (Hero hero : list) {
+            if (hero.hp > 100 && hero.damage < 50) {
+                System.out.println(hero);
+            }
+        }
+    }
+
+    public static void filterHero2(List<Hero> heroList, HeroChecker heroChecker) {
+
+        for (Hero hero : heroList) {
+            if (heroChecker.test(hero)) {
+                System.out.println(hero);
+            }
+        }
+
+    }
+    public static void normal(){
         Random r = new Random();
         ArrayList<Hero> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -93,24 +122,40 @@ public class TestLambda {
                 .skip(2)
                 .findFirst();
         hero4.ifPresent(System.out::println);
-
     }
 
-    public static void filterHero(List<Hero> list) {
-        for (Hero hero : list) {
-            if (hero.hp > 100 && hero.damage < 50) {
-                System.out.println(hero);
-            }
-        }
-    }
+    public static void lambda(){
+        List<CodeType> list = new ArrayList<>();
 
-    public static void filterHero2(List<Hero> heroList, HeroChecker heroChecker) {
+        CodeType c1 = new CodeType();
+        c1.setCodeType("001");
+        c1.setCode("1");
+        c1.setName("字符串");
+        list.add(c1);
 
-        for (Hero hero : heroList) {
-            if (heroChecker.test(hero)) {
-                System.out.println(hero);
-            }
-        }
+        CodeType c2 = new CodeType();
+        c2.setCodeType("002");
+        c2.setCode("2");
+        c2.setName("数组");
+        list.add(c2);
+
+        CodeType c3 = new CodeType();
+        c3.setCodeType("001");
+        c3.setCode("1");
+        c3.setName("整形");
+        list.add(c3);
+        // 根据codeType来分组，相同codeType合成一个List
+        Map<String, List<CodeType>> listMap = list.stream()
+                .filter(Objects::nonNull)
+                // groupingBy以某个字段作为分组
+                // mapping传入两个参数：对象、操作
+                .collect(Collectors.groupingBy(CodeType::getCodeType, Collectors.mapping(x -> x, Collectors.toList())));
+
+        Map<String, List<CodeType>> listMap2 = list.stream()
+                .filter(Objects::nonNull)
+                // groupingBy以某个字段作为分组
+                .collect(Collectors.groupingBy(CodeType::getCodeType));
+
 
     }
 }
