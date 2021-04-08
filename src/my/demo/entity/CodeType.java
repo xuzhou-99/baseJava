@@ -7,6 +7,7 @@ package my.demo.entity;
  * @title CodeType
  * @date 2021/4/2 13:40
  */
+
 public class CodeType {
 
     private String codeType;
@@ -38,4 +39,12 @@ public class CodeType {
     }
 
 
+    @Override
+    public String toString() {
+        return "CodeType{" +
+                "codeType='" + codeType + '\'' +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

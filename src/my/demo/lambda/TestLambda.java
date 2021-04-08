@@ -9,8 +9,6 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
 import my.demo.entity.CodeType;
 import my.demo.entity.Hero;
 
@@ -23,7 +21,6 @@ import my.demo.entity.Hero;
 public class TestLambda {
     public static void main(String[] args) {
 
-        lambda();
 
     }
 
@@ -44,7 +41,8 @@ public class TestLambda {
         }
 
     }
-    public static void normal(){
+
+    public static void normal() {
         Random r = new Random();
         ArrayList<Hero> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -75,7 +73,7 @@ public class TestLambda {
 
         System.out.println("按照血量排序：");
         list.stream()
-                .sorted((h1, h2) -> h1.hp > h2.hp ? 1 : -1)
+                .sorted((h1, h2) -> (h1.hp > h2.hp ? 1 : -1))
                 .forEach(System.out::print);
 
         System.out.println("保留前3个：");
@@ -124,7 +122,7 @@ public class TestLambda {
         hero4.ifPresent(System.out::println);
     }
 
-    public static void lambda(){
+    public static void lambda() {
         List<CodeType> list = new ArrayList<>();
 
         CodeType c1 = new CodeType();
@@ -142,20 +140,26 @@ public class TestLambda {
         CodeType c3 = new CodeType();
         c3.setCodeType("001");
         c3.setCode("1");
-        c3.setName("整形");
+        c3.setName("整形1");
         list.add(c3);
-        // 根据codeType来分组，相同codeType合成一个List
-        Map<String, List<CodeType>> listMap = list.stream()
+
+        CodeType c4 = new CodeType();
+        c4.setCodeType("001");
+        c4.setCode("1");
+        c4.setName("整形2");
+        list.add(c4);
+
+        // error
+        // java.lang.IllegalStateException: Duplicate key my.demo.entity.CodeType@54a097cc
+        // Map<String, CodeType> collect1 = list.stream()
+        //       .filter(Objects::nonNull)
+        //       .collect(Collectors.toMap(CodeType::getCode, x -> x));
+
+        // 改进
+        // (first, next) -> first) 相同的key，取第一个
+        // (first, next) -> next) 相同的key 取最后一个
+        Map<String, CodeType> collect2 = list.stream()
                 .filter(Objects::nonNull)
-                // groupingBy以某个字段作为分组
-                // mapping传入两个参数：对象、操作
-                .collect(Collectors.groupingBy(CodeType::getCodeType, Collectors.mapping(x -> x, Collectors.toList())));
-
-        Map<String, List<CodeType>> listMap2 = list.stream()
-                .filter(Objects::nonNull)
-                // groupingBy以某个字段作为分组
-                .collect(Collectors.groupingBy(CodeType::getCodeType));
-
-
+                .collect(Collectors.toMap(CodeType::getCode, x -> x, (first, next) -> first));
     }
 }
