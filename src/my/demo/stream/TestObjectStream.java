@@ -21,9 +21,9 @@ public class TestObjectStream {
 
     public static void main(String[] args) {
 
-        testObject();
+//        testObject();
         testObjects1();
-        testObjects2();
+//        testObjects2();
     }
 
     private static void testObjects2(){
