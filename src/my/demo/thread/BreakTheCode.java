@@ -1,9 +1,9 @@
 package my.demo.thread;
 
+import my.demo.collection.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import my.demo.collection.CollestionUtils;
 
 /**
  * @author xuzhou
@@ -28,7 +28,7 @@ public class BreakTheCode {
      * 3. 创建一个日志线程，打印都用过哪些字符串去匹配，这个日志线程设计为守护线程
      */
     public static void testBreakCode() {
-        String password = CollestionUtils.randomString(3);
+        String password = CollectionUtils.randomString(3);
         System.out.println("密码是:" + password);
         List<String> passwords = new ArrayList<>();
 
@@ -46,7 +46,7 @@ public class BreakTheCode {
      * 3. 创建一个日志线程，打印都用过哪些字符串去匹配，这个日志线程设计为守护线程
      */
     public static void testBreakCode2() {
-        String code = CollestionUtils.randomCreateString(3);
+        String code = CollectionUtils.randomCreateString(3);
         System.out.println("the code is :" + code);
         System.out.println("start breaking...");
         breakCode(code);

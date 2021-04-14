@@ -50,6 +50,9 @@ public class Hero implements Serializable {
         return this.name;
     }
 
+    public void setName(String name){
+        this.name = name;
+    }
     /**
      * 重写toString方法
      */
