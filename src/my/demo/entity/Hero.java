@@ -9,10 +9,13 @@ import java.io.Serializable;
  * @date 2021/2/24 15:04
  */
 public class Hero implements Serializable {
+
     /**
      * 表示这个类当前的版本，如果有变化，应该修改版本号
      */
-    private static final long serialVersionUID = 1L;
+//    private static final long serialVersionUID = -8813195776234724990L;
+
+
     /**
      * 名称
      */
@@ -53,6 +56,24 @@ public class Hero implements Serializable {
     public void setName(String name){
         this.name = name;
     }
+
+
+    public float getHp() {
+        return hp;
+    }
+
+    public void setHp(float hp) {
+        this.hp = hp;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
     /**
      * 重写toString方法
      */

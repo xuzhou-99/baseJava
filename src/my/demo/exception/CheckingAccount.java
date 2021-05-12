@@ -20,11 +20,11 @@ public class CheckingAccount extends Account {
     }
 
     @Override
-    public void withdraw(double amt) throws OverDraftException {
+    public void withdraw(double amt) throws OverdraftException {
         if(amt > this.balance){
             double overMoney = amt - this.balance;
             if(overMoney>this.overdraftProtection){
-                throw new OverDraftException("已超过透支额度",overMoney - this.overdraftProtection);
+                throw new OverdraftException("已超过透支额度",overMoney - this.overdraftProtection);
             }else {
                 this.balance = 0.0;
                 this.overdraftProtection -= overMoney;

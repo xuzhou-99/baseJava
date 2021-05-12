@@ -36,7 +36,7 @@ public class Account {
      * 取钱
      * @param atm 金额
      */
-    public void withdraw(double atm) throws OverdraftException{
+    public void withdraw(double atm) throws OverdraftException {
         if(this.balance < atm){
             throw new OverdraftException("余额不足", atm - this.balance);
         }

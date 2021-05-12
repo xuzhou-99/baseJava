@@ -1,6 +1,8 @@
 package my.demo.entity;
 
 
+import java.io.Serializable;
+
 /**
  * @author xuzhou
  * @version 1.0.0
@@ -8,7 +10,12 @@ package my.demo.entity;
  * @date 2021/4/2 13:40
  */
 
-public class CodeType {
+public class CodeType implements Serializable {
+
+
+//    private static final long serialVersionUID = -3706387420717871375L;
+
+
 
     private String codeType;
 
