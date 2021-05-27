@@ -3,6 +3,8 @@ package my.demo.file;
 import java.io.File;
 import java.util.Objects;
 
+import static my.demo.file.FileUtils.listFile;
+
 /**
  * @author xuzhou
  * @version 1.0.0
@@ -22,14 +24,24 @@ public class FilePractice {
 //        localFile2();
 //
 //        localFile3();
-        File f = new File("c:/windows");
-        FileUtils.searchFileMultithreading(f, "123", ".txt");
+
+        //File f = new File("c:/windows");
+        //FileUtils.searchFileMultithreading(f, "123", ".txt");
+
+
 //        localFileRecursive(f);
 //
 //        System.out.println("The max file is: " + maxFile + ", size is: " + maxFile.length() + " byte"  );
 //        System.out.println("The min file is: " + minFile + ", size is: " + minFile.length() + " byte"  );
 
+
+        File file = new File("C:\\Users\\xuzhou\\Desktop\\两法衔接信创问题改造patch\\lfxj");
+        Integer sum = 0;
+        sum = listFile(file, sum);
+        System.out.println(sum);
+
     }
+
 
     private static void localFile1(){
         File file = new File("c:/windows");

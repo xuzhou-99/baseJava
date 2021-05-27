@@ -212,4 +212,30 @@ public class FileUtils {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 遍历文件夹/文件，打印所有的文件，并且输出总数
+     *
+     * @param file 文件/文件夹
+     * @param sum  总数
+     * @return sum
+     */
+    public static Integer listFile(File file, Integer sum) {
+
+        if (!file.exists()) {
+            System.out.println("该文件或文件夹不存在");
+            return sum;
+        }
+        if (file.isFile()) {
+            sum++;
+            System.out.println(file.getAbsolutePath());
+        } else {
+            File[] files = file.listFiles();
+            assert files != null;
+            for (File f : files) {
+                sum = listFile(f, sum);
+            }
+        }
+        return sum;
+    }
 }
